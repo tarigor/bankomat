@@ -1,6 +1,6 @@
 package com.senla.bankomat.exceptions;
 
-public class NoSuchCardException extends Exception{
+public class NoSuchCardException extends Exception {
     public NoSuchCardException() {
         super();
     }

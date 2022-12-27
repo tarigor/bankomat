@@ -5,18 +5,20 @@ import com.senla.bankomat.exceptions.InputErrorException;
 import com.senla.bankomat.exceptions.NoSuchCardException;
 import com.senla.bankomat.exceptions.NoSuchClientException;
 import com.senla.bankomat.service.BaseService;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 public class LoginServiceImpl extends BaseService {
+    private static final Logger LOGGER = Logger.getLogger(LoginServiceImpl.class);
     private static final AccountBlockServiceImpl accountBlockService = AccountBlockServiceImpl.getInstance();
     private static final String CARD_PATTERN = "[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}";
 
     @Override
     public void execute() throws InputErrorException, NoSuchClientException, NoSuchCardException, AccountBlockException, IOException {
         String cardNumber = getStringFromConsole("enter the Card Number in format xxxx-xxxx-xxxx-xxxx", CARD_PATTERN);
-        System.out.println("Card Number -> " + cardNumber);
+        LOGGER.info("Card Number -> " + cardNumber);
         if (checkForCardExisting(cardNumber)) {
             accountBlockService.checkCardForBlockEnding(cardNumber);
         } else {
@@ -25,13 +27,13 @@ public class LoginServiceImpl extends BaseService {
         int attempts = 3;
         while (attempts != 0) {
             int pinCode = getIntFromConsole("enter the PIN code in format xxxx");
-            System.out.println("PIN code -> " + pinCode);
+            LOGGER.info("PIN code -> " + pinCode);
             if (checkPinCode(cardNumber, pinCode)) {
                 setLoggedClientId(getClientId(cardNumber));
                 break;
             }
             attempts--;
-            System.out.println("Wrong PIN code. Attempts remained: " + attempts);
+            LOGGER.error("Wrong PIN code. Attempts remained: " + attempts);
         }
         checkForPinInputAttempts(attempts, cardNumber);
     }

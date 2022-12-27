@@ -1,17 +1,14 @@
 package com.senla.bankomat.service;
 
 import com.senla.bankomat.entity.Client;
-import com.senla.bankomat.exceptions.AccountBlockException;
-import com.senla.bankomat.exceptions.InputErrorException;
-import com.senla.bankomat.exceptions.NoSuchCardException;
-import com.senla.bankomat.exceptions.NoSuchClientException;
+import com.senla.bankomat.exceptions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class BaseService {
+public abstract class BaseService {
     protected static int loggedClientId;
     protected static ArrayList<Client> clients = new ArrayList<>();
 
@@ -29,7 +26,7 @@ public class BaseService {
         BaseService.loggedClientId = loggedClientId;
     }
 
-    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException {
+    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException, NotSufficientBalanceException, MaximumTopUpLimitException {
     }
 
     protected int getIntFromConsole(String message) {
