@@ -1,7 +1,11 @@
-package com.senla.bankomat.service.constants;
+package com.senla.bankomat.constants;
 
 public enum MenuItems {
-    CHECK_BALANCE("Check Balance"), TOP_UP("Top-up Balance"), WITHDRAW("Withdraw money"), LOG_OUT("log-out"), LOGIN("Log-in");
+    CHECK_BALANCE("Check Balance"),
+    TOP_UP("Top-up Balance"),
+    WITHDRAW("Withdraw money"),
+    LOG_OUT("log-out"),
+    LOGIN("Log-in");
 
     private final String description;
 

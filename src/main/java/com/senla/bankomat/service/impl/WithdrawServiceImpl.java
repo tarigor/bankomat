@@ -2,13 +2,10 @@ package com.senla.bankomat.service.impl;
 
 import com.senla.bankomat.exceptions.NotSufficientBalanceException;
 import com.senla.bankomat.service.BaseService;
-import com.senla.bankomat.service.IWithdrawService;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class WithdrawServiceImpl extends BaseService implements IWithdrawService {
-    private static final Logger LOGGER = Logger.getLogger(WithdrawServiceImpl.class);
+public class WithdrawServiceImpl extends BaseService {
     private static final FileServiceImpl fileService = FileServiceImpl.getInstance();
     private static final CheckBalanceServiceImpl checkBalanceService = CheckBalanceServiceImpl.getInstance();
 
@@ -22,7 +19,7 @@ public class WithdrawServiceImpl extends BaseService implements IWithdrawService
                 //checkMoneyInBankomat(withdrawAmount);
                 checkCurrentBalance(withdrawAmount);
                 double balanceAfterWithdraw = Math.round((getClients().get(i).getBalance() - withdrawAmount) * 100.0) / 100.0;
-                LOGGER.info("balance after withdraw -> " + balanceAfterWithdraw);
+                System.out.println("balance after withdraw -> " + balanceAfterWithdraw);
                 getClients().get(i).setBalance(balanceAfterWithdraw);
             }
         }

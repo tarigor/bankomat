@@ -1,6 +1,6 @@
 package com.senla.bankomat.service;
 
-import com.senla.bankomat.service.constants.MenuItems;
+import com.senla.bankomat.constants.MenuItems;
 
 import java.util.Map;
 

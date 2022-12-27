@@ -1,9 +1,9 @@
-package com.senla.bankomat.factory;
+package com.senla.bankomat.service.factory;
 
+import com.senla.bankomat.constants.MenuItems;
 import com.senla.bankomat.exceptions.MissingMenuItemException;
 import com.senla.bankomat.exceptions.ServiceMissingException;
 import com.senla.bankomat.service.BaseService;
-import com.senla.bankomat.service.constants.MenuItems;
 import com.senla.bankomat.service.impl.*;
 
 public class ServiceFactoryImpl {

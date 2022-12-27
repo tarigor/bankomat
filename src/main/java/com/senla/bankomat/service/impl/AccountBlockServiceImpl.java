@@ -3,7 +3,6 @@ package com.senla.bankomat.service.impl;
 import com.senla.bankomat.exceptions.AccountBlockException;
 import com.senla.bankomat.exceptions.NoSuchClientException;
 import com.senla.bankomat.service.BaseService;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -11,7 +10,6 @@ import java.time.ZoneId;
 import java.util.Arrays;
 
 public class AccountBlockServiceImpl extends BaseService {
-    private static final Logger LOGGER = Logger.getLogger(AccountBlockServiceImpl.class);
     private static final AccountBlockServiceImpl accountBlockService = new AccountBlockServiceImpl();
     private static final FileServiceImpl fileService = FileServiceImpl.getInstance();
 
@@ -20,14 +18,14 @@ public class AccountBlockServiceImpl extends BaseService {
     }
 
     public void blockAccount(String cardNumber) throws NoSuchClientException, IOException {
-        LOGGER.info("Three attempts failed. The account with card number: " + cardNumber + " is going to block for 1 hour");
+        System.out.println("Three attempts failed. The account with card number: " + cardNumber + " is going to block for 1 hour");
         getClients().get(getClientIndexFromList(cardNumber)).setLastBlockingTime(System.currentTimeMillis());
         fileService.writeToFile(getClients());
     }
 
     public void checkCardForBlockEnding(String cardNumber) throws NoSuchClientException, AccountBlockException {
         if ((getClients().get(getClientIndexFromList(cardNumber)).getLastBlockingTime() + 3.6e+6) > System.currentTimeMillis()) {
-            LOGGER.info("Current time -> " + Instant.ofEpochMilli(System.currentTimeMillis())
+            System.out.println("Current time -> " + Instant.ofEpochMilli(System.currentTimeMillis())
                     .atZone(ZoneId.of("Europe/Paris")));
             throw new AccountBlockException("The card number: " + cardNumber + " is blocked fro 1 hour, unblocking time: " +
                     Instant.ofEpochMilli(getClients()

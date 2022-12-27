@@ -1,8 +1,8 @@
 package com.senla.bankomat.service.impl;
 
+import com.senla.bankomat.constants.MenuItems;
 import com.senla.bankomat.service.BaseService;
 import com.senla.bankomat.service.IConsoleMenuViewService;
-import com.senla.bankomat.service.constants.MenuItems;
 
 import java.util.Map;
 
@@ -13,6 +13,7 @@ public class ConsoleMenuViewServiceImpl extends BaseService implements IConsoleM
         return consoleMenuViewService;
     }
 
+    @Override
     public Map<Integer, MenuItems> showMenu() {
         if (getLoggedClientId() == 0) {
             return composeMenu(Map.of(0, MenuItems.LOGIN));

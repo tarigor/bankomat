@@ -2,6 +2,7 @@ package com.senla.bankomat.service.impl;
 
 import com.senla.bankomat.entity.Client;
 import com.senla.bankomat.service.BaseService;
+import com.senla.bankomat.service.IFileService;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,9 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileServiceImpl extends BaseService {
+public class FileServiceImpl extends BaseService implements IFileService {
 
-    public static final String PATHNAME = System.getProperty("user.dir") + "/src/main/resources/input_data.txt";
     private static final FileServiceImpl fileService = new FileServiceImpl();
     private final String PATH = System.getProperty("user.dir") + "/src/main/resources/data.txt";
 
@@ -19,6 +19,7 @@ public class FileServiceImpl extends BaseService {
         return fileService;
     }
 
+    @Override
     public void loadFromFile() throws IOException {
         Scanner scanner = new Scanner(new File(PATH));
         getClients().clear();
@@ -46,6 +47,7 @@ public class FileServiceImpl extends BaseService {
         return cardData;
     }
 
+    @Override
     public void writeToFile(ArrayList<Client> clientArrayList) throws IOException {
         FileWriter fw = new FileWriter(PATH, false);
         for (Client client : clientArrayList) {

@@ -1,7 +1,7 @@
 package com.senla.bankomat;
 
+import com.senla.bankomat.constants.MenuItems;
 import com.senla.bankomat.exceptions.*;
-import com.senla.bankomat.service.constants.MenuItems;
 import com.senla.bankomat.service.impl.ConsoleMenuViewServiceImpl;
 import com.senla.bankomat.service.impl.FileServiceImpl;
 import com.senla.bankomat.service.impl.MenuRoutineImpl;
@@ -17,7 +17,6 @@ public class Runner {
     private static final FileServiceImpl fileService = FileServiceImpl.getInstance();
 
     public static void main(String[] args) {
-        System.out.println("path -> " + System.getProperty("user.dir"));
         while (true) {
             try {
                 fileService.loadFromFile();

@@ -18,7 +18,7 @@ public class LoginServiceImpl extends BaseService {
     @Override
     public void execute() throws InputErrorException, NoSuchClientException, NoSuchCardException, AccountBlockException, IOException {
         String cardNumber = getStringFromConsole("enter the Card Number in format xxxx-xxxx-xxxx-xxxx", CARD_PATTERN);
-        LOGGER.info("Card Number -> " + cardNumber);
+        System.out.println("Card Number -> " + cardNumber);
         if (checkForCardExisting(cardNumber)) {
             accountBlockService.checkCardForBlockEnding(cardNumber);
         } else {
@@ -27,7 +27,7 @@ public class LoginServiceImpl extends BaseService {
         int attempts = 3;
         while (attempts != 0) {
             int pinCode = getIntFromConsole("enter the PIN code in format xxxx");
-            LOGGER.info("PIN code -> " + pinCode);
+            System.out.println("PIN code -> " + pinCode);
             if (checkPinCode(cardNumber, pinCode)) {
                 setLoggedClientId(getClientId(cardNumber));
                 break;
