@@ -1,5 +1,6 @@
 package com.senla.bankomat.service.impl;
 
+import com.senla.bankomat.constants.DataType;
 import com.senla.bankomat.entity.Client;
 import com.senla.bankomat.service.BaseService;
 import com.senla.bankomat.service.IFileService;
@@ -7,25 +8,33 @@ import com.senla.bankomat.service.IFileService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileServiceImpl extends BaseService implements IFileService {
 
     private static final FileServiceImpl fileService = new FileServiceImpl();
-    private final String PATH = System.getProperty("user.dir") + "/src/main/resources/data.txt";
+    private final String PATH = System.getProperty("user.dir") + "/src/main/resources/";
 
     public static FileServiceImpl getInstance() {
         return fileService;
     }
 
     @Override
-    public void loadFromFile() throws IOException {
-        Scanner scanner = new Scanner(new File(PATH));
-        getClients().clear();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            storeToArray(line);
+    public void loadFromFile(DataType dataType) throws IOException {
+        Scanner scanner = new Scanner(new File(PATH + dataType.getFileName()));
+        if (dataType == DataType.CLIENT) {
+            getClients().clear();
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                storeToArray(line);
+            }
+        }
+        if (dataType == DataType.BANKOMAT) {
+            String value = Files.readAllLines(Paths.get(PATH + dataType.getFileName())).get(0);
+            setBankomatBalance(Double.parseDouble(value));
         }
     }
 
@@ -49,11 +58,16 @@ public class FileServiceImpl extends BaseService implements IFileService {
 
     @Override
     public void writeToFile(ArrayList<Client> clientArrayList) throws IOException {
-        FileWriter fw = new FileWriter(PATH, false);
+        FileWriter fw = new FileWriter(PATH + DataType.CLIENT.getFileName(), false);
         for (Client client : clientArrayList) {
             fw.write(client.toFileString());
             fw.append('\n');
         }
         fw.close();
+    }
+
+    @Override
+    public void writeToFile(double bankomatBalance) throws IOException {
+        Files.write(Paths.get(PATH + DataType.BANKOMAT.getFileName()), Double.toString(bankomatBalance).getBytes());
     }
 }

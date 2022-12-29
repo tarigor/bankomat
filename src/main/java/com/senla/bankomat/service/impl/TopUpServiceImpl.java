@@ -20,6 +20,8 @@ public class TopUpServiceImpl extends BaseService {
                 System.out.println("new balance: " + getClients().get(i).getBalance());
             }
         }
+        setBankomatBalance(getBankomatBalance() + topUpAmount);
+        fileService.writeToFile(getBankomatBalance());
         fileService.writeToFile(getClients());
     }
 

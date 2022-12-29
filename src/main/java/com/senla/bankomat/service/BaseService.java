@@ -11,6 +11,7 @@ import java.util.Scanner;
 public abstract class BaseService {
     protected static int loggedClientId;
     protected static ArrayList<Client> clients = new ArrayList<>();
+    protected static double bankomatBalance;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +27,15 @@ public abstract class BaseService {
         BaseService.loggedClientId = loggedClientId;
     }
 
-    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException, NotSufficientBalanceException, MaximumTopUpLimitException {
+    public static double getBankomatBalance() {
+        return bankomatBalance;
+    }
+
+    public static void setBankomatBalance(double bankomatBalance) {
+        BaseService.bankomatBalance = bankomatBalance;
+    }
+
+    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException, NotSufficientBalanceException, MaximumTopUpLimitException, NotEnoughMoneyInBankomatException {
     }
 
     protected int getIntFromConsole(String message) {

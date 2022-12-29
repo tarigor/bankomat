@@ -20,7 +20,7 @@ public class MenuRoutineImpl extends BaseService implements IMenuRoutine {
     public void menuCommandExecute(Map<Integer, MenuItems> itemsHashMap)
             throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException,
             AccountBlockException, ServiceMissingException, NotSufficientBalanceException,
-            MissingMenuItemException, MaximumTopUpLimitException {
+            MissingMenuItemException, MaximumTopUpLimitException, NotEnoughMoneyInBankomatException {
         serviceFactory.getService(itemsHashMap.get(getIntFromConsole("Select the desire action"))).execute();
     }
 }

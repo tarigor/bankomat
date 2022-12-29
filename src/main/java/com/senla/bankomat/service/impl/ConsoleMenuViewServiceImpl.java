@@ -5,6 +5,7 @@ import com.senla.bankomat.service.BaseService;
 import com.senla.bankomat.service.IConsoleMenuViewService;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ConsoleMenuViewServiceImpl extends BaseService implements IConsoleMenuViewService {
     private static final ConsoleMenuViewServiceImpl consoleMenuViewService = new ConsoleMenuViewServiceImpl();
@@ -23,7 +24,7 @@ public class ConsoleMenuViewServiceImpl extends BaseService implements IConsoleM
     }
 
     private Map<Integer, MenuItems> composeMenu(Map<Integer, MenuItems> menuItemsMap) {
-        for (Map.Entry<Integer, MenuItems> entry : menuItemsMap.entrySet()) {
+        for (Map.Entry<Integer, MenuItems> entry : new TreeMap<>(menuItemsMap).entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getDescription());
         }
         return menuItemsMap;

@@ -9,5 +9,5 @@ import java.util.Map;
 public interface IMenuRoutine {
     void menuCommandExecute(Map<Integer, MenuItems> itemsHashMap) throws
             InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException,
-            ServiceMissingException, NotSufficientBalanceException, MissingMenuItemException, MaximumTopUpLimitException;
+            ServiceMissingException, NotSufficientBalanceException, MissingMenuItemException, MaximumTopUpLimitException, NotEnoughMoneyInBankomatException;
 }

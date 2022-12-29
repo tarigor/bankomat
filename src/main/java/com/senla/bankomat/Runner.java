@@ -1,5 +1,6 @@
 package com.senla.bankomat;
 
+import com.senla.bankomat.constants.DataType;
 import com.senla.bankomat.constants.MenuItems;
 import com.senla.bankomat.exceptions.*;
 import com.senla.bankomat.service.impl.ConsoleMenuViewServiceImpl;
@@ -19,10 +20,13 @@ public class Runner {
     public static void main(String[] args) {
         while (true) {
             try {
-                fileService.loadFromFile();
+                fileService.loadFromFile(DataType.CLIENT);
+                fileService.loadFromFile(DataType.BANKOMAT);
                 Map<Integer, MenuItems> menuList = consoleMenuViewService.showMenu();
                 menuRoutine.menuCommandExecute(menuList);
-            } catch (IOException | InputErrorException | NoSuchClientException | NoSuchCardException | AccountBlockException | ServiceMissingException | NotSufficientBalanceException | MissingMenuItemException | MaximumTopUpLimitException e) {
+            } catch (IOException | InputErrorException | NoSuchClientException | NoSuchCardException
+                    | AccountBlockException | ServiceMissingException | NotSufficientBalanceException
+                    | MissingMenuItemException | MaximumTopUpLimitException | NotEnoughMoneyInBankomatException e) {
                 LOGGER.error("an exception occurred -> " + e);
             }
         }
