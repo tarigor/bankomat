@@ -24,9 +24,11 @@ public class ConsoleMenuViewServiceImpl extends BaseService implements IConsoleM
     }
 
     private Map<Integer, MenuItems> composeMenu(Map<Integer, MenuItems> menuItemsMap) {
+        System.out.println("---------------------");
         for (Map.Entry<Integer, MenuItems> entry : new TreeMap<>(menuItemsMap).entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getDescription());
         }
+        System.out.println("---------------------");
         return menuItemsMap;
     }
 
