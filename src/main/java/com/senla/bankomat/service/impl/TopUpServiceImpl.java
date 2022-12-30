@@ -1,5 +1,6 @@
 package com.senla.bankomat.service.impl;
 
+import com.senla.bankomat.exceptions.InputErrorException;
 import com.senla.bankomat.exceptions.MaximumTopUpLimitException;
 import com.senla.bankomat.service.BaseService;
 
@@ -10,7 +11,7 @@ public class TopUpServiceImpl extends BaseService {
     private final FileServiceImpl fileService = FileServiceImpl.getInstance();
 
     @Override
-    public void execute() throws IOException, MaximumTopUpLimitException {
+    public void execute() throws IOException, MaximumTopUpLimitException, InputErrorException {
         checkBalanceService.execute();
         double topUpAmount = getDoubleFromConsole("Please enter the desired value to top-up");
         checkTopUpLimit(topUpAmount);

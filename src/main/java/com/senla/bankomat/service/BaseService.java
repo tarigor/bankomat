@@ -56,8 +56,14 @@ public abstract class BaseService {
         }
     }
 
-    protected double getDoubleFromConsole(String message) {
+    protected double getDoubleFromConsole(String message) throws InputErrorException {
         System.out.println(message);
-        return new Scanner(System.in).nextDouble();
+        double input;
+        try{
+            input = new Scanner(System.in).nextDouble();
+        }catch (InputMismatchException e){
+            throw  new InputErrorException("please enter a double format number (for instance: 12.22) ");
+        }
+        return input;
     }
 }

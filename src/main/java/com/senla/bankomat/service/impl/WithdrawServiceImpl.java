@@ -1,5 +1,6 @@
 package com.senla.bankomat.service.impl;
 
+import com.senla.bankomat.exceptions.InputErrorException;
 import com.senla.bankomat.exceptions.NotEnoughMoneyInBankomatException;
 import com.senla.bankomat.exceptions.NotSufficientBalanceException;
 import com.senla.bankomat.service.BaseService;
@@ -11,7 +12,7 @@ public class WithdrawServiceImpl extends BaseService {
     private static final CheckBalanceServiceImpl checkBalanceService = CheckBalanceServiceImpl.getInstance();
 
     @Override
-    public void execute() throws IOException, NotSufficientBalanceException, NotEnoughMoneyInBankomatException {
+    public void execute() throws IOException, NotSufficientBalanceException, NotEnoughMoneyInBankomatException, InputErrorException {
 
         for (int i = 0; i < getClients().size(); i++) {
             if (getClients().get(i).getClientId() == getLoggedClientId()) {
