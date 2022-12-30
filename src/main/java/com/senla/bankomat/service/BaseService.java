@@ -13,8 +13,6 @@ public abstract class BaseService {
     protected static ArrayList<Client> clients = new ArrayList<>();
     protected static double bankomatBalance;
 
-    private final Scanner scanner = new Scanner(System.in);
-
     public static ArrayList<Client> getClients() {
         return clients;
     }
@@ -35,18 +33,24 @@ public abstract class BaseService {
         BaseService.bankomatBalance = bankomatBalance;
     }
 
-    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException, NotSufficientBalanceException, MaximumTopUpLimitException, NotEnoughMoneyInBankomatException {
+    public void execute() throws InputErrorException, NoSuchClientException, IOException, NoSuchCardException, AccountBlockException, NotSufficientBalanceException, MaximumTopUpLimitException, NotEnoughMoneyInBankomatException, MissingMenuItemException {
     }
 
-    protected int getIntFromConsole(String message) {
+    protected int getIntFromConsole(String message) throws InputErrorException {
         System.out.println(message);
-        return scanner.nextInt();
+        int input = 0;
+        try {
+            input = new Scanner(System.in).nextInt();
+        } catch (InputMismatchException e) {
+            throw new InputErrorException("please enter an integer number");
+        }
+        return input;
     }
 
     protected String getStringFromConsole(String message, String pattern) throws InputErrorException {
         System.out.println(message);
         try {
-            return scanner.next(pattern);
+            return new Scanner(System.in).next(pattern);
         } catch (InputMismatchException e) {
             throw new InputErrorException("wrong input");
         }
@@ -54,6 +58,6 @@ public abstract class BaseService {
 
     protected double getDoubleFromConsole(String message) {
         System.out.println(message);
-        return scanner.nextDouble();
+        return new Scanner(System.in).nextDouble();
     }
 }

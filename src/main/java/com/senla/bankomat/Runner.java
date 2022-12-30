@@ -25,8 +25,8 @@ public class Runner {
                 Map<Integer, MenuItems> menuList = consoleMenuViewService.showMenu();
                 menuRoutine.menuCommandExecute(menuList);
             } catch (IOException | InputErrorException | NoSuchClientException | NoSuchCardException
-                    | AccountBlockException | ServiceMissingException | NotSufficientBalanceException
-                    | MissingMenuItemException | MaximumTopUpLimitException | NotEnoughMoneyInBankomatException e) {
+                     | AccountBlockException | ServiceMissingException | NotSufficientBalanceException
+                     | MissingMenuItemException | MaximumTopUpLimitException | NotEnoughMoneyInBankomatException e) {
                 LOGGER.error("an exception occurred -> " + e);
             }
         }

@@ -29,8 +29,8 @@ public class AccountBlockServiceImpl extends BaseService {
                     .atZone(ZoneId.of("Europe/Paris")));
             throw new AccountBlockException("The card number: " + cardNumber + " is blocked fro 1 hour, unblocking time: " +
                     Instant.ofEpochMilli(getClients()
-                            .get(getClientIndexFromList(cardNumber))
-                            .getLastBlockingTime() + 3600000)
+                                    .get(getClientIndexFromList(cardNumber))
+                                    .getLastBlockingTime() + 3600000)
                             .atZone(ZoneId.of("Europe/Paris")));
         }
     }
