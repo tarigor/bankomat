@@ -45,11 +45,17 @@
 
 блокировка карты снимается автоматически по истечении суток.
 
-###№ How to run from bash console
+###№ How to run from console (Windows OS or Linux OS)
 
-to execute app.sh file located in root of the project
+Linux OS
+- the app.sh file located in root of the project
+- the folder "data" necessary to put on same location with a sh and jar files. 
+- run sh file ./ app.sh
 
-./ app.sh
+Windows OS
+- the app.bat file located in root of the project
+- the folder "data" necessary to put on same location with a bat and jar files.
+- run bat file app.bat
 
 #### Technologies:
 

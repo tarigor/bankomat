@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class FileServiceImpl extends BaseService implements IFileService {
 
     private static final FileServiceImpl fileService = new FileServiceImpl();
-    private final String PATH = System.getProperty("user.dir") + "/src/main/resources/";
+    private final String PATH = System.getProperty("user.dir") + "/data/";
 
     public static FileServiceImpl getInstance() {
         return fileService;
