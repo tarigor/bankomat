@@ -17,7 +17,7 @@ public class TopUpServiceImpl extends BaseService {
         checkTopUpLimit(topUpAmount);
         for (int i = 0; i < getClients().size(); i++) {
             if (getClients().get(i).getClientId() == getLoggedClientId()) {
-                getClients().get(i).setBalance(getClients().get(i).getBalance() + topUpAmount);
+                getClients().get(i).setBalance(Math.round((getClients().get(i).getBalance() + topUpAmount) * 100.0) / 100.0);
                 System.out.println("new balance: " + getClients().get(i).getBalance());
             }
         }
